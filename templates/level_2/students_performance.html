@@ -19,18 +19,21 @@
             </tr>
           </thead>
           <tbody>
+            {% for performance in performances %}
             <tr>
-              <th scope="row">Jack</th>
-              <td>✅</td>
-              <td>✅</td>
-              <td>❌</td>
+              {% for key, val in performance.items %}
+                {% if key == 'student_name' %}
+                <th scope="row">{{performance.student_name}}</th>
+                {% else%}
+                  {% if val %}
+                  <td>✅</td>
+                  {% else %}
+                  <td>❌</td>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}              
             </tr>
-            <tr>
-              <th scope="row">Jill</th>
-              <td>❌</td>
-              <td>❌</td>
-              <td>✅</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </article>
