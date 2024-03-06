@@ -1,3 +1,4 @@
+{% load task_extras %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,17 +18,24 @@
       <div class="grid">
         <div>
           <h4>К выполнению</h4>
-          <article class="card">Задача 1</article>
-          <article class="card">Задача 2</article>
-          <article class="card">Задача 3</article>
+          {% get_tasks_by_status tasks status='todo' as tasks_todo%}
+          {% for task_todo in tasks_todo %}
+          <article class="card">{{ task_todo.title }}</article>
+          {% endfor %}
         </div>
         <div>
           <h4>В процессе</h4>
-          <article class="card">Задача 4</article>
+          {% get_tasks_by_status tasks status='in_progress' as tasks_in_progress%}
+          {% for task_in_progress in tasks_in_progress %}
+          <article class="card">{{ task_in_progress.title }}</article>
+          {% endfor %}
         </div>
         <div>
           <h4>Выполнено</h4>
-          <article class="card">Задача 5</article>
+          {% get_tasks_by_status tasks status='done' as tasks_done%}
+          {% for task_done in tasks_done %}
+          <article class="card">{{ task_done.title }}</article>
+          {% endfor %}
         </div>
       </div>
     </main>
